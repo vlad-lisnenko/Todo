@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Notes</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+</head>
+    <br><br><br><br>
+    <div class="container my-2" >
+        <h1>List notes</h1>
+        <a th:href="@{/showNewTodoForm}" class="btn btn-primary btn-sm bm-3">Create New Note</a>
+
+        <table  border="1 " class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date created</th>
+                    <th>Last modified</th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="todo : ${todos}">
+                    <td th:text="${todo.title}"></td>
+                    <td th:text="${todo.description}"></td>
+                    <td th:text="${todo.status}"></td>
+                    <td th:text="${todo.dateCreated}"></td>
+                    <td th:text="${todo.lastModified}"></td>
+                    <td> <a th:href="@{/showFormForUpdate/{id}(id=${todo.id})}" class="btn btn-primary"> Update</a> </td>
+                    <td> <a th:href="@{/deleteTodo/{id}(id=${todo.id})}" class="btn btn-danger"> Delete</a> </td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+
+</body>
+</html>
